@@ -8,15 +8,16 @@ class TicketControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
     };
+    this.handleClick = this.handleClick.bind(this); //new code here
   }
 
-  handleClick = () => {
+  handleClick() {
     this.setState((prevState) => ({
       formVisibleOnPage: !prevState.formVisibleOnPage,
     }));
-  };
+  }
 
-  render(){
+  render() {
     let currentlyVisibleState = null;
     let buttonText = null; // new code
     if (this.state.formVisibleOnPage) {
@@ -29,7 +30,8 @@ class TicketControl extends React.Component {
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button> { /* new code */ }
+        <button onClick={this.handleClick}>{buttonText}</button>{" "}
+        {/* new code */}
       </React.Fragment>
     );
   }
