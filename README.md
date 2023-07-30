@@ -1,6 +1,6 @@
 # Help Queue
 
-A React application designed to manage a help queue.
+A React application designed to manage a help queue. Currently working in process
 
 ## Table of Contents
 
