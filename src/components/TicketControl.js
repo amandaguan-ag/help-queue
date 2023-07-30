@@ -11,7 +11,13 @@ class TicketControl extends React.Component {
   }
 
   render() {
-    return <React.Fragment></React.Fragment>;
+    let currentlyVisibleState = null;
+    if (this.state.formVisibleOnPage) {
+      currentlyVisibleState = <NewTicketForm />;
+    } else {
+      currentlyVisibleState = <TicketList />;
+    }
+    return <React.Fragment>{currentlyVisibleState}</React.Fragment>;
   }
 }
 
