@@ -2,6 +2,7 @@ import React from "react";
 import NewTicketForm from "./NewTicketForm";
 import TicketList from "./TicketList";
 import TicketDetail from "./TicketDetail";
+import EditTicketForm from "./EditTicketForm";
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class TicketControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       mainTicketList: [],
-      selectedTicket: null, // new code
+      selectedTicket: null,
+      editing: false, // new code
     };
     // Bind the handleClick method
     this.handleClick = this.handleClick.bind(this);
@@ -20,6 +22,7 @@ class TicketControl extends React.Component {
       this.setState({
         formVisibleOnPage: false,
         selectedTicket: null,
+        editing: false, // new code
       });
     } else {
       this.setState((prevState) => ({
@@ -53,19 +56,32 @@ class TicketControl extends React.Component {
     });
   };
 
+  handleEditClick = () => {
+    console.log("handleEditClick reached!");
+    this.setState({ editing: true });
+  };
+
+  handleEditingTicketInList = (ticketToEdit) => {
+    const editedMainTicketList = this.state.mainTicketList
+      .filter((ticket) => ticket.id !== this.state.selectedTicket.id)
+      .concat(ticketToEdit);
+    this.setState({
+      mainTicketList: editedMainTicketList,
+      editing: false,
+      selectedTicket: null,
+    });
+  };
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedTicket != null) {
+    if (this.state.editing) {
       currentlyVisibleState = (
-        <TicketDetail
-          ticket={this.state.selectedTicket}
-          onClickingDelete={this.handleDeletingTicket}
-        />
+        <EditTicketForm ticket={this.state.selectedTicket} />
       );
       buttonText = "Return to Ticket List";
-    } else if (this.state.formVisibleOnPage) {
+    } else if (this.state.selectedTicket != null) {
       // This conditional needs to be updated to "else if."
       currentlyVisibleState = (
         <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />
@@ -73,11 +89,12 @@ class TicketControl extends React.Component {
       buttonText = "Return to Ticket List";
     } else {
       currentlyVisibleState = (
-        <TicketList
-          ticketList={this.state.mainTicketList}
-          onTicketSelection={this.handleChangingSelectedTicket}
+        <EditTicketForm
+          ticket={this.state.selectedTicket}
+          onEditTicket={this.handleEditingTicketInList}
         />
       );
+
       // Because a user will actually be clicking on the ticket in the Ticket component, we will need to pass our new handleChangingSelectedTicket method as a prop.
       buttonText = "Add Ticket";
     }
