@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
 
 function NewTicketForm(props) {
-  //props is the onNewTicketCreation prop from TicketControl
-
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
     props.onNewTicketCreation({

@@ -18,7 +18,7 @@ function EditTicketForm(props) {
   return (
     <React.Fragment>
       <ReusableForm
-        formSubmissionHandler={handleEditTicketFormSubmission} /* new code */
+        formSubmissionHandler={handleEditTicketFormSubmission}
         buttonText="Update Ticket"
       />
     </React.Fragment>
@@ -26,8 +26,8 @@ function EditTicketForm(props) {
 }
 
 EditTicketForm.propTypes = {
-  ticket: PropTypes.object,
   onEditTicket: PropTypes.func,
+  ticket: PropTypes.object,
 };
 
 export default EditTicketForm;

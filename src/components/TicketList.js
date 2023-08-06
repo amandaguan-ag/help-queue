@@ -2,8 +2,6 @@ import React from "react";
 import Ticket from "./Ticket";
 import PropTypes from "prop-types";
 
-// remove const mainTicketList = [ ... ]. We no longer want these.
-
 function TicketList(props) {
   return (
     <React.Fragment>
