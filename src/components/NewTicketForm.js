@@ -1,8 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types"; //import PropTypes
-import { v4 } from "uuid"; // new code
+import { v4 } from "uuid";
+import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
 
+function NewTicketForm(props) {
+  //props is the onNewTicketCreation prop from TicketControl
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
@@ -12,18 +14,17 @@ import ReusableForm from "./ReusableForm";
       issue: event.target.issue.value,
       id: v4(),
     });
-
-    return (
-      <React.Fragment>
-        <ReusableForm
-          formSubmissionHandler={handleNewTicketFormSubmission}
-          buttonText="Help!"
-        />
-      </React.Fragment>
-    );
   }
 
-// We also need to add PropTypes for our new prop.
+  return (
+    <React.Fragment>
+      <ReusableForm
+        formSubmissionHandler={handleNewTicketFormSubmission}
+        buttonText="Help!"
+      />
+    </React.Fragment>
+  );
+}
 
 NewTicketForm.propTypes = {
   onNewTicketCreation: PropTypes.func,
